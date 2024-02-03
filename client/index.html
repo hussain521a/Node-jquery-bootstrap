@@ -1,0 +1,147 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>CRUD Node.js and Mysql</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+</head>
+<body>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    <div class="container">    
+        <h2>Student Information System (SIS)</h2>
+        <hr>
+        <h3>Students</h3>
+        <button type="button" id="openAdd" class="btn btn-success" data-toggle="modal">Add New</button>
+        <table class="table table-striped" >
+            <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Age</th>
+                <th scope="col">Gender</th>
+                <th scope="col">Action</th>
+            </tr>
+            </thead>
+            <tbody id="mytable">
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Add New Product Modal-->
+    <form action="" method="post">
+        <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Add New Student</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input type="text" name="first_name" class="form-control" placeholder="first_name" >
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <input type="text" name="last_name" class="form-control" placeholder="last_name" >
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <input type="text" name="age" class="form-control" placeholder="age" >
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <input type="text" name="gender" class="form-control" placeholder="gender" >
+                        </div>
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" id="addStudent" class="btn btn-primary">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <!-- Edit Product Modal-->
+    <form action="" method="post">
+        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Edit Student</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input type="text" name="first_name" class="form-control" placeholder="first_name" >
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <input type="text" name="last_name" class="form-control" placeholder="last_name" >
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <input type="text" name="age" class="form-control" placeholder="age" >
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <input type="text" name="gender" class="form-control" placeholder="gender" >
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="hidden" name="id">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" id="editStudent" class="btn btn-primary">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <!-- Delete Product Modal-->
+    <form action="" method="post">
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="myModalLabel">Delete Student</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <strong>Are you sure you want to Delete this student?</strong>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input type="text" name="first_name" class="form-control" placeholder="first_name" readonly>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <input type="text" name="last_name" class="form-control" placeholder="last_name" readonly>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <input type="text" name="age" class="form-control" placeholder="age" readonly>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <input type="text" name="gender" class="form-control" placeholder="gender" readonly>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="hidden" name="id">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" id="deleteStudent" class="btn btn-primary">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+</html>
